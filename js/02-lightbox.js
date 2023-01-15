@@ -1,13 +1,19 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
-const instance = basicLightbox.create(`
-    <div class="modal">
-        <p>
-            Your first lightbox with just a few lines of code.
-            Yes, it's really that simple.
-        </p>
-    </div>
-`);
+const imageList = document.querySelector(".gallery");
 
-instance.show();
-console.log(galleryItems);
+galleryItems.forEach((image) => {
+    imageList.insertAdjacentHTML(
+        "beforeend",
+        `<li class="gallery__item">
+      <a class="gallery__link" href="${image.original}">
+        <img src="${image.preview}" alt="${image.description}" class="gallery__image"/>
+      </a>
+    </li>`
+    );
+});
+
+const lightbox = new SimpleLightbox(".gallery a", {
+    captionsData: "alt",
+    captionDelay: 250,
+});
